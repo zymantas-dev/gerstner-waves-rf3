@@ -81,7 +81,7 @@ export default function App() {
             <WaveControls waves={waves} onChange={editWave} />
           </div>
         </details>
-        <footer>Marine forecast data by <a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank" rel="noreferrer">Open-Meteo</a> · map by OpenFreeMap</footer>
+        <footer>Marine forecast data by <a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank" rel="noreferrer">Open-Meteo</a> · map by OpenFreeMap · <a href="https://sketchfab.com/3d-models/cargo-ship-c95d341642c949bd85a03c97a15f81c3" target="_blank" rel="noreferrer">cargo ship model</a> (Sketchfab)</footer>
       </aside>
     </main>
   )
