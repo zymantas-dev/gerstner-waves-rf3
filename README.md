@@ -1,52 +1,39 @@
-# Gerstner waves
-Gerstner/Trochoidal waves implementation using React and ThreeJS.
+# Gerstner Sea Lab
 
-## Table of contents
-- [Gerstner waves](#gerstner-waves)
-  - [Table of contents](#table-of-contents)
-  - [TODO](#todo)
-  - [Setup](#setup)
-  - [Technologies](#technologies)
-  - [Reference](#reference)
-  - [Credits](#credits)
+An interactive ocean built from Gerstner (trochoidal) waves in React and Three.js. Click open water on a map, pull its real marine forecast from Open-Meteo, and the three wave layers are tuned to that sea state - then adjust direction, steepness and wavelength by hand and watch a ship ride the surface.
 
----
-[Demo](https://lazygeekpanda.github.io/gerstner-waves-rf3/)
+Live: https://gerstner-waves.kodeo.lt/
 
-![](https://raw.githubusercontent.com/lazygeekpanda/gerstner-waves-rf3/master/img/demo1.png)
-![](https://raw.githubusercontent.com/lazygeekpanda/gerstner-waves-rf3/master/img/demo2.png)
+![](img/demo1.png)
+![](img/demo2.png)
 
-## TODO
-* Better ship rotation and placement
-* Connect meteo API to get data and calculate waves
+## How it works
 
----
+- **Waves** - the vertex shader sums three Gerstner waves (`src/components/OceanScene.tsx`). Each wave displaces vertices horizontally *and* vertically, which gives the sharp crests a plain sine surface lacks. Normals come from the analytic tangent/binormal, and the ship samples the same function on the CPU (`src/lib/waves.ts`) so it floats on the exact surface drawn.
+- **Forecast** - `src/lib/marine.ts` calls the Open-Meteo marine API; `wavesFromMarine` maps wave height, period and direction (swell + wind waves) onto the wave parameters, with unit tests in `src/lib/waves.test.ts`.
+- **Map** - MapLibre with OpenFreeMap tiles; only ocean surfaces are selectable.
+- **No WebGL** - the page shows an explanatory message instead of a blank screen.
 
-## Setup
-If you want to launch the application, download repository code and just run the following commands:
-```
+## Run it
+
+```bash
 npm install
-
-npm start
+npm run dev      # dev server
+npm test         # wave maths unit tests
+npm run build    # type-check + production build
 ```
----
 
-## Technologies
-This project is created with:
-* react
-* three
-* @react-three/fiber
-* @react-three/drei
-* leva
-* styled-components
+## Stack
 
----
+React 18, Vite, TypeScript, three, @react-three/fiber, @react-three/drei, maplibre-gl, vitest.
 
+## References
 
-## Reference
- - [Gerstner/Trochoidal Wave wiki](https://en.wikipedia.org/wiki/Trochoidal_wave)
- - [Gerstner wave ThreeJS](https://sbcode.net/threejs/gerstnerwater/)
-
+- [Trochoidal wave](https://en.wikipedia.org/wiki/Trochoidal_wave)
+- [Gerstner water in three.js](https://sbcode.net/threejs/gerstnerwater/)
 
 ## Credits
- - [Ship Model](https://sketchfab.com/3d-models/cargo-ship-c95d341642c949bd85a03c97a15f81c3)
+
+- Marine forecast: [Open-Meteo](https://open-meteo.com/en/docs/marine-weather-api)
+- Map tiles: [OpenFreeMap](https://openfreemap.org/) / OpenStreetMap contributors
+- [Cargo ship model](https://sketchfab.com/3d-models/cargo-ship-c95d341642c949bd85a03c97a15f81c3) on Sketchfab

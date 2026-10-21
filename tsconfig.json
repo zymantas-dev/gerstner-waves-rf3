@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/main.tsx", "src/App.tsx", "src/lib/**/*.ts", "src/components/OceanMap.tsx", "src/components/OceanScene.tsx"]
+  "include": ["src/main.tsx", "src/App.tsx", "src/lib/**/*.ts", "src/components/OceanMap.tsx", "src/components/OceanScene.tsx", "src/components/WebGLGuard.tsx"]
 }
